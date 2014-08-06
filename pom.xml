@@ -19,6 +19,9 @@
 		<spring-framework.version>4.0.6.RELEASE</spring-framework.version>
 		<spring-batch.version>3.0.1.RELEASE</spring-batch.version>
 
+        <!-- Database -->
+        <hsqldb.version>2.3.2</hsqldb.version>
+
 		<!-- Test -->
 		<junit.version>4.11</junit.version>
 	</properties>
@@ -38,8 +41,15 @@
 			<version>${spring-framework.version}</version>
 		</dependency>
 
+        <!-- Database -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>${hsqldb.version}</version>
+        </dependency>
 
-		<!-- Test Artifacts -->
+
+        <!-- Test Artifacts -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
