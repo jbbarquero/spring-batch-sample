@@ -1,15 +1,11 @@
 package com.malsolo.springframework.batch.sample;
 
-import javax.sql.DataSource;
-
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.launch.JobOperator;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.core.launch.support.SimpleJobOperator;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
@@ -24,6 +20,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableBatchProcessing

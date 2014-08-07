@@ -5,14 +5,14 @@ import org.springframework.batch.core.JobParametersInvalidException;
 import org.springframework.batch.core.configuration.DuplicateJobException;
 import org.springframework.batch.core.configuration.JobFactory;
 import org.springframework.batch.core.configuration.JobRegistry;
-import org.springframework.batch.core.explore.JobExplorer;
-import org.springframework.batch.core.launch.*;
-import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.launch.JobInstanceAlreadyExistsException;
+import org.springframework.batch.core.launch.JobOperator;
+import org.springframework.batch.core.launch.NoSuchJobException;
+import org.springframework.batch.core.launch.NoSuchJobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 
 
 /**

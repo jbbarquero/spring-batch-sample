@@ -43,8 +43,6 @@ public class MainHelper {
         }
         sb.append("\n***********************************************************\n");
         System.out.print(sb.toString());
-
-
     }
 
     public static void reportResults(javax.batch.operations.JobOperator operator, long executionId) {
