@@ -1,26 +1,26 @@
 package com.malsolo.springframework.batch.sample;
 
+import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.StepExecution;
+import org.springframework.batch.core.launch.JobOperator;
+import org.springframework.batch.core.launch.NoSuchJobExecutionException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 
-import javax.batch.runtime.Metric;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jbeneito on 6/08/14.
  */
 public class MainHelper {
 
-    public static void reportResults(org.springframework.batch.core.JobExecution jobExecution) {
+    public static void reportResults(JobExecution jobExecution) {
         Collection<StepExecution> stepExecutions = jobExecution.getStepExecutions();
 
         System.out.println("***********************************************************");
         System.out.println(String.format("%s finished with a status of %s (%s).", jobExecution.getJobInstance().getJobName(), jobExecution.getExitStatus().getExitDescription(), jobExecution.getExitStatus().getExitCode()) );
-        System.out.println("Steps executed:");
+        System.out.println("* Steps executed:");
         for (StepExecution stepExecution : stepExecutions) {
             System.out.println(String.format("\t%s : %s" , stepExecution.getStepName(), stepExecution.getExitStatus()));
 
@@ -31,6 +31,20 @@ public class MainHelper {
 
     }
 
+    public static void reportResults(JobOperator jobOperator, long executionId) throws NoSuchJobExecutionException {
+        StringBuilder sb = new StringBuilder();//To avoid logs from DB access of JobOperator
+        sb.append("\n***********************************************************\n");
+        sb.append(jobOperator.getSummary(executionId));
+        sb.append("\n* Steps executed:");
+        Map<Long, String> stepExecutionSummaries = jobOperator.getStepExecutionSummaries(executionId);
+        for (String stepExecutionSummary : stepExecutionSummaries.values()) {
+            sb.append("\n").append(stepExecutionSummary);
+        }
+        sb.append("\n***********************************************************\n");
+        System.out.print(sb.toString());
+
+
+    }
 
     public static void reportPeople(JdbcTemplate jdbcTemplate) {
 
