@@ -1,0 +1,20 @@
+<job id="importUser" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0">
+    <listeners>
+        <listener ref="com.malsolo.springframework.batch.sample.jsr352components.listener.DatabaseIntializer">
+            <properties>
+                <property name="scriptPath" value="/schema-all.sql"/>
+            </properties>
+        </listener>
+    </listeners>
+    <step id="step1">
+        <chunk>
+            <reader ref="com.malsolo.springframework.batch.sample.jsr352components.reader.FileItemReader">
+                <properties>
+                    <property name="fileName" value="sample-data.csv"/>
+                </properties>
+            </reader>
+            <processor ref="com.malsolo.springframework.batch.sample.jsr352components.processor.CapsItemProcessor"/>
+            <writer ref="com.malsolo.springframework.batch.sample.jsr352components.writer.JdbcItemWriter"/>
+        </chunk>
+    </step>
+</job>

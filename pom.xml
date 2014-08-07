@@ -28,9 +28,13 @@
 
         <!-- Database -->
         <hsqldb.version>2.3.2</hsqldb.version>
+        <commons-dbcp.version>1.4</commons-dbcp.version>
 
 		<!-- Test -->
 		<junit.version>4.11</junit.version>
+
+        <!-- Java EE APIs -->
+        <javax.inject.version>1</javax.inject.version>
 	</properties>
 
 
@@ -60,6 +64,18 @@
             <version>${hsqldb.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>${commons-dbcp.version}</version>
+        </dependency>
+
+        <!-- Java EE APIs -->
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>${javax.inject.version}</version>
+        </dependency>
 
         <!-- Test Artifacts -->
 		<dependency>

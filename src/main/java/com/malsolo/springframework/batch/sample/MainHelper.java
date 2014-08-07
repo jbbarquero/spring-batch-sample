@@ -6,6 +6,7 @@ import org.springframework.batch.core.launch.JobOperator;
 import org.springframework.batch.core.launch.NoSuchJobExecutionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import javax.batch.runtime.Metric;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +44,24 @@ public class MainHelper {
         sb.append("\n***********************************************************\n");
         System.out.print(sb.toString());
 
+
+    }
+
+    public static void reportResults(javax.batch.operations.JobOperator operator, long executionId) {
+        javax.batch.runtime.JobExecution jobExecution = operator.getJobExecution(executionId);
+        List<javax.batch.runtime.StepExecution> stepExecutions = operator.getStepExecutions(jobExecution.getExecutionId());
+
+        System.out.println("***********************************************************");
+        System.out.println(String.format("%s finished with a status of %s.", jobExecution.getJobName(), jobExecution.getBatchStatus()) );
+        System.out.println("Steps executed:");
+        for (javax.batch.runtime.StepExecution stepExecution : stepExecutions) {
+            System.out.println(String.format("\t%s : %s" , stepExecution.getStepName(), stepExecution.getBatchStatus()));
+
+            for (Metric metric : stepExecution.getMetrics()) {
+                System.out.println(String.format("\t\t%s : %s", metric.getType(), metric.getValue()));
+            }
+        }
+        System.out.println("***********************************************************");
 
     }
 
