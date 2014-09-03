@@ -28,7 +28,6 @@ public class FileItemReader implements ItemReader {
     public void open(Serializable checkpoint) throws Exception {
         assert fileName != null && fileName.length() > 0;
 
-        ;
         reader = new BufferedReader(new FileReader(new File(this.getClass().getClassLoader().getResource(fileName).toURI())));
 
         if(checkpoint != null) {

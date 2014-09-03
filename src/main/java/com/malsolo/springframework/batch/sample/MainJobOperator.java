@@ -33,9 +33,7 @@ public class MainJobOperator {
 
     public static void main(String... args) throws JobParametersInvalidException, JobInstanceAlreadyExistsException, NoSuchJobException, DuplicateJobException, NoSuchJobExecutionException {
 
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        context.register(ApplicationConfiguration.class, DataSourceConfiguration.class, BatchConfiguration.class);
-        context.refresh();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
 
         MainJobOperator main = context.getBean(MainJobOperator.class);
         main.jobRegistry.register(main.jobFactory);

@@ -27,9 +27,7 @@ public class MainJobLauncher {
 
     public static void main(String... args) throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
 
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        context.register(ApplicationConfiguration.class, DataSourceConfiguration.class, BatchConfiguration.class);
-        context.refresh();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
 
         MainJobLauncher main = context.getBean(MainJobLauncher.class);
 
