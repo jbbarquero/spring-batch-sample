@@ -21,10 +21,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class MainJobOperator {
 
-    @Autowired
-    JobFactory jobFactory;
-    @Autowired
-    JobRegistry jobRegistry;
+//    @Autowired
+//    JobFactory jobFactory;
+//    @Autowired
+//    JobRegistry jobRegistry;
     @Autowired
     JobOperator jobOperator;
 
@@ -36,11 +36,14 @@ public class MainJobOperator {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
 
         MainJobOperator main = context.getBean(MainJobOperator.class);
-        main.jobRegistry.register(main.jobFactory);
+//        main.jobRegistry.register(main.jobFactory);
         long executionId = main.jobOperator.start(main.importUserJob.getName(), null);
 
         MainHelper.reportResults(main.jobOperator, executionId);
         MainHelper.reportPeople(context.getBean(JdbcTemplate.class));
+
+        context.close();
+
         System.out.printf("\nFIN %s", main.getClass().getName());
 
     }
